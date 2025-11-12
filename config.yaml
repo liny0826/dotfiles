@@ -3,7 +3,7 @@
 # This will make all your workspace creations use these settings by default
 
 # Your dotfiles repository (update this with your actual repo URL)
-dotfiles: https://github.com/YOUR-USERNAME/dotfiles
+dotfiles: https://github.com/liny0826/dotfiles
 
 # Preferred shell
 shell: zsh
@@ -20,9 +20,17 @@ editor: vscode  # or cursor, intellij, pycharm, goland
 
 # VSCode extensions you want pre-installed
 vscode-extensions:
+- "hashicorp.terraform"
+- "ziyasal.vscode-open-in-github"
+- "anysphere.cursorpyri"
 - "ms-azuretools.vscode-docker"
-- "eamodio.gitlens"
-- "github.copilot"
 - "ms-python.python"
+- "ms-python.vscode-pylance"
 - "golang.go"
 - "redhat.vscode-yaml"
+- "datadog.datadog-vscode"
+- "BazelBuild.vscode-bazel"
+- "golang.go"
+- "stackbuild.bazel-stack-vscode"
+- "timonwong.shellcheck"
+- "tamasfe.even-better-toml"
