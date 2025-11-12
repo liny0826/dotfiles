@@ -69,7 +69,7 @@ backup_history() {
     fi
 }
 
-# Function to restore most recent history
+# Function to restore most recent history with proper completion reload
 restore_history() {
     if [ -n "$WORKSPACE_NAME" ]; then
         local latest_backup=$(ls -t "$WORKSPACE_HISTORY_DIR"/zsh_history_${WORKSPACE_NAME}_*.bak 2>/dev/null | head -n1)
@@ -77,9 +77,28 @@ restore_history() {
             cat "$latest_backup" >> "$HOME/.zsh_history"
             # Remove duplicates and sort by timestamp
             sort "$HOME/.zsh_history" | uniq > "$HOME/.zsh_history.tmp" && mv "$HOME/.zsh_history.tmp" "$HOME/.zsh_history"
-            echo "History restored from: $(basename $latest_backup)"
+            
+            # Force reload history into memory for autocompletion
+            fc -R "$HOME/.zsh_history"
+            
+            # Rebuild zsh completion cache
+            if [[ -d ~/.oh-my-zsh ]]; then
+                autoload -U compinit
+                compinit -d ~/.zcompdump
+            fi
+            
+            echo "History restored and completions rebuilt from: $(basename $latest_backup)"
         fi
     fi
+}
+
+# Manual history refresh function
+refresh_completions() {
+    echo "🔄 Refreshing zsh completions..."
+    fc -R ~/.zsh_history
+    autoload -U compinit
+    compinit -d ~/.zcompdump
+    echo "✅ Completions refreshed"
 }
 
 # Auto-backup history on exit
@@ -96,9 +115,11 @@ EOF
 
 echo "🎉 Workspace setup complete!"
 echo ""
-echo "Next steps:"
-echo "1. Create a public GitHub repository for your dotfiles"
-echo "2. Add your .zshrc and this install.sh to that repo"
-echo "3. Make install.sh executable: chmod +x install.sh"
-echo "4. Update your workspace config to use the dotfiles repo"
-echo "5. Use 'workspaces create <name>' and your setup will be automatic!"
+echo "💡 Pro tip: If autocompletion isn't working after history restore, run:"
+echo "   refresh_completions"
+echo ""
+echo "✅ Your setup now handles:"
+echo "  • History backup on workspace exit"
+echo "  • History restore on new workspace creation"  
+echo "  • Automatic completion refresh"
+echo "  • Manual refresh_completions() function"
