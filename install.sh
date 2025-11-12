@@ -53,9 +53,37 @@ fi
 echo "🍺 Installing Homebrew..."
 if ! command -v brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo "✅ Homebrew installed"
 else
     echo "✅ Homebrew already installed"
+fi
+
+# Install additional tools via Homebrew
+echo "🛠️ Installing additional tools..."
+
+# Install tig (git repository browser)
+if ! command -v tig &> /dev/null; then
+    brew install tig
+    echo "✅ tig installed"
+else
+    echo "✅ tig already installed"
+fi
+
+# Install temporal CLI
+if ! command -v temporal &> /dev/null; then
+    brew install temporal
+    echo "✅ temporal installed"
+else
+    echo "✅ temporal already installed"
+fi
+
+# Install grpcurl
+if ! command -v grpcurl &> /dev/null; then
+    brew install grpcurl
+    echo "✅ grpcurl installed"
+else
+    echo "✅ grpcurl already installed"
 fi
 
 # Set up zsh history preservation
