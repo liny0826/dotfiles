@@ -1,0 +1,28 @@
+# Datadog Workspaces Configuration
+# Place this file at: ~/.config/datadog/workspaces/config.yaml
+# This will make all your workspace creations use these settings by default
+
+# Your dotfiles repository (update this with your actual repo URL)
+dotfiles: https://github.com/YOUR-USERNAME/dotfiles
+
+# Preferred shell
+shell: zsh
+
+# Preferred region (choose based on your location)
+region: us-east-1  # or eu-west-3 for Europe
+
+# Instance type (adjust based on your needs)
+instance-type: aws:m5d.4xlarge
+
+# Auto-open editor after creation
+open-editor: true
+editor: vscode  # or cursor, intellij, pycharm, goland
+
+# VSCode extensions you want pre-installed
+vscode-extensions:
+- "ms-azuretools.vscode-docker"
+- "eamodio.gitlens"
+- "github.copilot"
+- "ms-python.python"
+- "golang.go"
+- "redhat.vscode-yaml"
