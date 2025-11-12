@@ -49,6 +49,15 @@ else
     echo "✅ Graphite already installed"
 fi
 
+# Install Homebrew
+echo "🍺 Installing Homebrew..."
+if ! command -v brew &> /dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "✅ Homebrew installed"
+else
+    echo "✅ Homebrew already installed"
+fi
+
 # Set up zsh history preservation
 echo "📚 Setting up history preservation..."
 mkdir -p ~/.config/workspace-history
