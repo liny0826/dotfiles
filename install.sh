@@ -16,6 +16,9 @@ for file in ~/dotfiles/.zshrc ~/dotfiles/.gitconfig; do
     fi
 done
 
+# This could be removed if the gitconfig is the repo
+git config --global core.editor "vim"
+
 # Install oh-my-zsh
 echo "🎨 Installing oh-my-zsh..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
