@@ -1,0 +1,86 @@
+{
+  "folders": [
+    {
+      "name": "terraform-config",
+      "uri": "vscode-remote://ssh-remote+{{.workspace}}/home/bits/go/src/github.com/DataDog/terraform-config"
+    }
+  ],
+  "remoteAuthority": "ssh-remote+{{.workspace}}",
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}/data-science/.venv/bin/python",
+    // Python linting & formatting
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.organizeImports.ruff": "explicit"
+      }
+    },
+    // ruff extension
+    "ruff.importStrategy": "fromEnvironment",
+    "ruff.configuration": "${workspaceFolder}/pyproject.toml",
+    // mypy (through official python extension)
+    "mypy-type-checker.importStrategy": "fromEnvironment",
+    "mypy-type-checker.args": [
+      "--config-file=pyproject.toml",
+      "--enable-imcomplete-features=Unpack"
+    ],
+    // Pylance config
+    "python.languageServer": "Pylance",
+    "python.analysis.indexing": true,
+    "python.analysis.userFileIndexingLimit": 20000,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.diagnosticSeverityOverrides": {
+      "reportGeneralTypeIssues": "information"
+    },
+    // Error lens settings
+    "errorLens.enabledDiagnosticLevels": [
+      "error"
+    ],
+    "terminal.integrated.env.linux": {
+      "SSH_AUTH_SOCK": "/home/bits/.ssh/ssh_auth_sock"
+    }
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [],
+    "compounds": []
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "VSCode: Install Extensions",
+        "command": "code",
+        "args": [
+          "--force",
+          "--install-extension",
+          "eamodio.gitlens", // Useful git capabilities
+          "--install-extension",
+          "ziyasal.vscode-open-in-github", // Easily open files in github
+          "--install-extension",
+          "tamasfe.even-better-toml", // Toml linting
+          "--install-extension",
+          "ms-python.python", // Python base extension (provides mypy, testing, LSP)
+          "--install-extension",
+          "ms-python.vscode-pylance", // Provides Pylance
+          "--install-extension",
+          "charliermarsh.ruff", // Ruff extension
+          "--install-extension",
+          "redhat.vscode-yaml", // Yaml linting
+          "--install-extension",
+          "yzhang.markdown-all-in-one", // Markdown linting
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": true,
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      }
+    ],
+    "inputs": []
+  }
+}
